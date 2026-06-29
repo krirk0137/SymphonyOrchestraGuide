@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>คู่มือเสียง Symphony – เลือกที่นั่ง</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #F4EDD7;
+      --paper:    #FBF6EC;
+      --ink:      #1C1007;
+      --ink-soft: #5C4A30;
+      --burgundy: #7A1414;
+      --gold:     #C4922A;
+      --gold-lt:  #E8C86A;
+      --navy:     #1E3152;
+      --rule:     rgba(124,80,20,.18);
+
+      --s9:  #3A7D44; /* best  */
+      --s8:  #6FAE52; /* good  */
+      --s75: #D4B836; /* ok    */
+      --s65: #D4762A; /* fair  */
+      --s55: #B03030; /* poor  */
+      --s4:  #7A2020; /* worst */
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Sans', 'Noto Sans Thai', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--navy);
+      color: #F4EDD7;
+      text-align: center;
+      padding: 3.5rem 1.5rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 39px,
+        rgba(255,255,255,.04) 39px,
+        rgba(255,255,255,.04) 40px
+      );
+      pointer-events: none;
+    }
+    .eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: .68rem;
+      font-weight: 500;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gold-lt);
+      margin-bottom: .75rem;
+    }
+    header h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -.01em;
+    }
+    header h1 em {
+      font-style: italic;
+      color: var(--gold-lt);
+    }
+    .sub {
+      margin-top: .9rem;
+      font-size: .9rem;
+      color: rgba(244,237,215,.65);
+      max-width: 34ch;
+      margin-inline: auto;
+    }
+
+    /* ── Content wrapper ── */
+    .wrap { max-width: 780px; margin: 0 auto; padding: 0 1.25rem 4rem; }
+
+    /* ── Principles ── */
+    .principles {
+      margin-top: 2.5rem;
+      border-top: 1px solid var(--rule);
+      padding-top: 2rem;
+    }
+    .principles h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--burgundy);
+      margin-bottom: 1.1rem;
+      letter-spacing: .03em;
+    }
+    .principle-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: .75rem;
+    }
+    .pill {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-left: 3px solid var(--gold);
+      border-radius: 4px;
+      padding: .75rem 1rem;
+      font-size: .82rem;
+      line-height: 1.55;
+    }
+    .pill strong { display: block; font-weight: 500; margin-bottom: .2rem; color: var(--ink); }
+    .pill span { color: var(--ink-soft); }
+
+    /* ── Map section ── */
+    .map-section {
+      margin-top: 2.8rem;
+      border-top: 1px solid var(--rule);
+      padding-top: 2rem;
+    }
+    .map-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--burgundy);
+      margin-bottom: 1.5rem;
+    }
+
+    .seat-map {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 1.5rem 1rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .45rem;
+      position: relative;
+    }
+    .stage-bar {
+      background: var(--navy);
+      color: #F4EDD7;
+      text-align: center;
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      padding: .5rem 0;
+      width: 85%;
+      border-radius: 3px 3px 0 0;
+      margin-bottom: .5rem;
+    }
+    .map-row {
+      display: flex;
+      gap: .4rem;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+    .floor-label {
+      font-size: .6rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin: .3rem 0 .1rem;
+      align-self: flex-start;
+      padding-left: .5rem;
+      opacity: .6;
+    }
+    .divider-line {
+      width: 90%;
+      height: 1px;
+      background: var(--rule);
+      border: none;
+      margin: .2rem 0;
+      border-top: 1px dashed var(--rule);
+    }
+
+    .seat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      cursor: default;
+      transition: transform .15s, box-shadow .15s;
+      position: relative;
+      padding: .35rem .2rem;
+      min-width: 44px;
+      text-align: center;
+      border: 1px solid rgba(0,0,0,.08);
+    }
+    .seat:hover {
+      transform: translateY(-2px) scale(1.06);
+      box-shadow: 0 4px 16px rgba(0,0,0,.18);
+      z-index: 10;
+    }
+    .seat .zone-id {
+      font-size: .6rem;
+      font-weight: 500;
+      letter-spacing: .04em;
+      color: rgba(255,255,255,.9);
+    }
+    .seat .zone-score {
+      font-size: .78rem;
+      font-weight: 700;
+      color: #fff;
+      margin-top: .05rem;
+    }
+    .seat .zone-stars {
+      font-size: .55rem;
+      color: rgba(255,255,255,.8);
+      margin-top: .05rem;
+    }
+
+    /* Size variants */
+    .seat.lg  { width: 80px; min-height: 56px; }
+    .seat.md  { width: 62px; min-height: 50px; }
+    .seat.sm  { width: 50px; min-height: 44px; }
+    .seat.xs  { width: 40px; min-height: 38px; font-size: .7rem; }
+
+    /* Score colors */
+    .sc-95 { background: var(--s9); }
+    .sc-9  { background: #2E7D37; }
+    .sc-8  { background: var(--s8); }
+    .sc-75 { background: var(--s75); }
+    .sc-65 { background: var(--s65); }
+    .sc-6  { background: #C06028; }
+    .sc-55 { background: var(--s55); }
+    .sc-5  { background: #943535; }
+    .sc-4  { background: var(--s4); }
+
+    /* ── Legend ── */
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem .9rem;
+      margin-top: 1rem;
+      padding: .75rem 1rem;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      font-size: .75rem;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+      color: var(--ink-soft);
+    }
+    .legend-dot {
+      width: 10px; height: 10px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* ── Ratings grid ── */
+    .ratings-section {
+      margin-top: 2.8rem;
+      border-top: 1px solid var(--rule);
+      padding-top: 2rem;
+    }
+    .ratings-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--burgundy);
+      margin-bottom: 1.25rem;
+    }
+
+    .ratings-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: .75rem;
+    }
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .card-head {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: .75rem 1rem;
+    }
+    .score-badge {
+      width: 44px; height: 44px;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .score-badge .num {
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .score-badge .denom {
+      font-size: .55rem;
+      opacity: .8;
+    }
+    .card-meta { flex: 1; }
+    .card-zone { font-size: .75rem; font-weight: 500; color: var(--ink-soft); }
+    .card-tier {
+      font-size: .8rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-top: .05rem;
+    }
+    .card-body {
+      padding: .55rem 1rem .75rem;
+      font-size: .78rem;
+      color: var(--ink-soft);
+      border-top: 1px solid var(--rule);
+      line-height: 1.55;
+    }
+
+    /* ── Summary bar ── */
+    .summary {
+      margin-top: 2.5rem;
+      background: var(--navy);
+      color: #F4EDD7;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+    }
+    .summary h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--gold-lt);
+      margin-bottom: .6rem;
+      letter-spacing: .02em;
+    }
+    .summary p { font-size: .85rem; color: rgba(244,237,215,.8); line-height: 1.65; }
+    .summary strong { color: #F4EDD7; font-weight: 500; }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: .72rem;
+      color: var(--ink-soft);
+      opacity: .5;
+      padding-bottom: 2rem;
+    }
+
+    /* tooltip on hover */
+    .seat[data-tip]::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(28,16,7,.92);
+      color: #F4EDD7;
+      font-size: .65rem;
+      white-space: nowrap;
+      padding: .3rem .55rem;
+      border-radius: 4px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .15s;
+      z-index: 20;
+      line-height: 1.4;
+      text-align: center;
+    }
+    .seat[data-tip]:hover::after { opacity: 1; }
+  </style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header>
+  <p class="eyebrow">Concert Sound Guide</p>
+  <h1>เลือกที่นั่ง<br><em>Symphony</em></h1>
+  <p class="sub">วิเคราะห์คุณภาพเสียงแต่ละโซน เพื่อประสบการณ์ออเคสตร้าที่ดีที่สุด</p>
+</header>
+
+<div class="wrap">
+
+  <!-- ── Principles ── -->
+  <section class="principles">
+    <h2>หลักการเสียง Symphony</h2>
+    <div class="principle-grid">
+      <div class="pill">
+        <strong>ใกล้เกินไป ❌</strong>
+        <span>ได้ยินแยกรายเครื่อง เสียงไม่ blend เป็นก้อน</span>
+      </div>
+      <div class="pill">
+        <strong>ไกลเกินไป ❌</strong>
+        <span>เสียงจางลง ขาดรายละเอียด low-end หาย</span>
+      </div>
+      <div class="pill">
+        <strong>ออกข้าง ❌</strong>
+        <span>Stereo image เบี้ยว ได้ยินเครื่องฝั่งใดฝั่งหนึ่งมากกว่า</span>
+      </div>
+      <div class="pill">
+        <strong>กลาง + mid-hall ✅</strong>
+        <span>Sweet spot ที่เสียงผสมกันดีที่สุด ได้ยินสมดุลทุกกลุ่มเครื่อง</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Map ── -->
+  <section class="map-section">
+    <h2>แผนผังที่นั่ง &amp; คะแนนเสียง</h2>
+    <div class="seat-map">
+      <div class="stage-bar">▲ &nbsp; STAGE &nbsp; ▲</div>
+
+      <p class="floor-label">1st Floor</p>
+
+      <!-- Row: B1 B2 B3 -->
+      <div class="map-row">
+        <div class="seat md sc-6" data-tip="B1 — 6/10 ข้างหน้าสุด เสียงเบี้ยว">
+          <span class="zone-id">B1</span>
+          <span class="zone-score">6.0</span>
+          <span class="zone-stars">★★★☆☆</span>
+        </div>
+        <div class="seat lg sc-75" data-tip="B2 — 7.5/10 หน้ากลาง เฉียงซ้าย-ขวานิด">
+          <span class="zone-id">B2</span>
+          <span class="zone-score">7.5</span>
+          <span class="zone-stars">★★★½☆</span>
+        </div>
+        <div class="seat md sc-6" data-tip="B3 — 6/10 ข้างหน้าสุด เสียงเบี้ยว">
+          <span class="zone-id">B3</span>
+          <span class="zone-score">6.0</span>
+          <span class="zone-stars">★★★☆☆</span>
+        </div>
+      </div>
+
+      <!-- Row: A1 center -->
+      <div class="map-row">
+        <div class="seat md sc-65" style="visibility:hidden; pointer-events:none;"></div>
+        <div class="seat lg sc-8" data-tip="A1 — 8/10 กลาง แต่ใกล้ stage เกินไปนิด">
+          <span class="zone-id">A1</span>
+          <span class="zone-score">8.0</span>
+          <span class="zone-stars">★★★★☆</span>
+        </div>
+        <div class="seat md sc-65" style="visibility:hidden; pointer-events:none;"></div>
+      </div>
+
+      <!-- Row: B4 A2 B5 -->
+      <div class="map-row">
+        <div class="seat md sc-65" data-tip="B4 — 6.5/10 ข้างกลาง เสียงเริ่มไม่สมดุล">
+          <span class="zone-id">B4</span>
+          <span class="zone-score">6.5</span>
+          <span class="zone-stars">★★★☆☆</span>
+        </div>
+        <div class="seat lg sc-95" data-tip="A2 — 9.5/10 🏆 Sweet spot! กลางแจ๋ว mid-hall">
+          <span class="zone-id">A2</span>
+          <span class="zone-score">9.5</span>
+          <span class="zone-stars">★★★★★</span>
+        </div>
+        <div class="seat md sc-65" data-tip="B5 — 6.5/10 ข้างกลาง เสียงเริ่มไม่สมดุล">
+          <span class="zone-id">B5</span>
+          <span class="zone-score">6.5</span>
+          <span class="zone-stars">★★★☆☆</span>
+        </div>
+      </div>
+
+      <!-- Row: D1 C1 D2 -->
+      <div class="map-row">
+        <div class="seat md sc-55" data-tip="D1 — 5.5/10 ข้างและถอยหลัง">
+          <span class="zone-id">D1</span>
+          <span class="zone-score">5.5</span>
+          <span class="zone-stars">★★½☆☆</span>
+        </div>
+        <div class="seat lg sc-9" data-tip="C1 — 9/10 กลาง blend ดีมาก ระยะดี">
+          <span class="zone-id">C1</span>
+          <span class="zone-score">9.0</span>
+          <span class="zone-stars">★★★★★</span>
+        </div>
+        <div class="seat md sc-55" data-tip="D2 — 5.5/10 ข้างและถอยหลัง">
+          <span class="zone-id">D2</span>
+          <span class="zone-score">5.5</span>
+          <span class="zone-stars">★★½☆☆</span>
+        </div>
+      </div>
+
+      <!-- Row: D3 C2 D4 -->
+      <div class="map-row">
+        <div class="seat sm sc-5" data-tip="D3 — 5/10 ขอบด้านข้าง ถอยหลัง">
+          <span class="zone-id">D3</span>
+          <span class="zone-score">5.0</span>
+          <span class="zone-stars">★★½☆☆</span>
+        </div>
+        <div class="seat md sc-8" data-tip="C2 — 8/10 กลาง ไกลขึ้น แต่ยัง blend ดี">
+          <span class="zone-id">C2</span>
+          <span class="zone-score">8.0</span>
+          <span class="zone-stars">★★★★☆</span>
+        </div>
+        <div class="seat sm sc-5" data-tip="D4 — 5/10 ขอบด้านข้าง ถอยหลัง">
+          <span class="zone-id">D4</span>
+          <span class="zone-score">5.0</span>
+          <span class="zone-stars">★★½☆☆</span>
+        </div>
+      </div>
+
+      <hr class="divider-line" />
+      <p class="floor-label">2nd Floor</p>
+
+      <!-- Row: C3 -->
+      <div class="map-row">
+        <div class="seat md sc-65" data-tip="C3 — 6.5/10 กลาง แต่ชั้น 2 เสียง reflect ไม่แน่นอน">
+          <span class="zone-id">C3</span>
+          <span class="zone-score">6.5</span>
+          <span class="zone-stars">★★★☆☆</span>
+        </div>
+      </div>
+
+      <!-- Row: D5 -->
+      <div class="map-row">
+        <div class="seat xs sc-5" data-tip="D5 — 5/10 ชั้น 2 ด้านข้าง">
+          <span class="zone-id" style="font-size:.58rem">D5</span>
+          <span class="zone-score" style="font-size:.7rem">5.0</span>
+        </div>
+      </div>
+
+      <!-- Row: D6 -->
+      <div class="map-row">
+        <div class="seat xs sc-4" data-tip="D6 — 4.5/10 ชั้น 2 หลัง เสียงจาง">
+          <span class="zone-id" style="font-size:.58rem">D6</span>
+          <span class="zone-score" style="font-size:.7rem">4.5</span>
+        </div>
+      </div>
+
+      <!-- Row: D7 -->
+      <div class="map-row">
+        <div class="seat xs sc-4" data-tip="D7 — 4/10 หลังสุดชั้น 2 เสียงสู้กลางไม่ได้">
+          <span class="zone-id" style="font-size:.58rem">D7</span>
+          <span class="zone-score" style="font-size:.7rem">4.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Legend -->
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--s9)"></div>9+ ยอดเยี่ยม</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--s8)"></div>8–8.9 ดีมาก</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--s75)"></div>7–7.9 ดี</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--s65)"></div>6–6.9 พอใช้</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--s55)"></div>5–5.9 ด้อย</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--s4)"></div>≤4.9 ต่ำ</div>
+      <span style="font-size:.7rem;color:var(--ink-soft);margin-left:auto;opacity:.6">Hover เพื่อดูคำอธิบาย</span>
+    </div>
+  </section>
+
+  <!-- ── Ratings Detail ── -->
+  <section class="ratings-section">
+    <h2>รายละเอียดแต่ละโซน</h2>
+    <div class="ratings-grid">
+
+      <div class="card">
+        <div class="card-head">
+          <div class="score-badge sc-95"><span class="num">9.5</span><span class="denom">/10</span></div>
+          <div class="card-meta">
+            <div class="card-zone">Zone A2</div>
+            <div class="card-tier">🏆 Sweet Spot</div>
+          </div>
+        </div>
+        <div class="card-body">กลางแจ๋ว + ระยะ mid-hall ที่สุดสำหรับ symphony เสียงทุกกลุ่มเครื่อง blend กันสมดุล stereo image ตรง</div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="score-badge sc-9"><span class="num">9.0</span><span class="denom">/10</span></div>
+          <div class="card-meta">
+            <div class="card-zone">Zone C1</div>
+            <div class="card-tier">✅ ดีมาก</div>
+          </div>
+        </div>
+        <div class="card-body">กลาง ระยะ back-mid hall เสียงผสมกันดีมาก ได้ ambient hall sound เต็มๆ เริ่มรู้สึก reverb ธรรมชาติ</div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="score-badge sc-8"><span class="num">8.0</span><span class="denom">/10</span></div>
+          <div class="card-meta">
+            <div class="card-zone">Zone A1</div>
+            <div class="card-tier">👍 ดี</div>
+          </div>
+        </div>
+        <div class="card-body">กลาง แต่ใกล้ stage เกินไปนิด อาจได้ยินเครื่องแถวหน้าชัดกว่ากลุ่มที่อยู่ไกลกว่า</div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="score-badge sc-8"><span class="num">8.0</span><span class="denom">/10</span></div>
+          <div class="card-meta">
+            <div class="card-zone">Zone C2</div>
+            <div class="card-tier">👍 ดี</div>
+          </div>
+        </div>
+        <div class="card-body">กลาง ไกลขึ้นอีกระดับ เสียงยัง blend ดี hall reverb เริ่มครอบงำ ใช้ได้ดี</div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="score-badge sc-75"><span class="num">7.5</span><span class="denom">/10</span></div>
+          <div class="card-meta">
+            <div class="card-zone">Zone B2</div>
+            <div class="card-tier">🆗 โอเค</div>
+          </div>
+        </div>
+        <div class="card-body">ค่อนไปหน้าแต่กลาง stereo image เฉียงซ้าย-ขวานิด เพราะยังไม่ถึงจุด convergence ของเสียง</div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="score-badge sc-65"><span class="num">6.5</span><span class="denom">/10</span></div>
+          <div class="card-meta">
+            <div class="card-zone">Zone B4 / B5</div>
+            <div class="card-tier">⚠️ พอใช้</div>
+          </div>
+        </div>
+        <div class="card-body">ด้านข้าง เสียงเริ่มไม่สมดุล เครื่องสายฝั่งใกล้ดังกว่าฝั่งตรงข้าม</div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="score-badge sc-65"><span class="num">6.5</span><span class="denom">/10</span></div>
+          <div class="card-meta">
+            <div class="card-zone">Zone C3 (2F)</div>
+            <div class="card-tier">⚠️ พอใช้</div>
+          </div>
+        </div>
+        <div class="card-body">กลาง แต่ชั้น 2 มักมี sound reflection จากเพดาน ทำให้เสียงไม่นิ่งเท่าชั้น 1</div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="score-badge sc-6"><span class="num">6.0</span><span class="denom">/10</span></div>
+          <div class="card-meta">
+            <div class="card-zone">Zone B1 / B3</div>
+            <div class="card-tier">⚠️ พอใช้</div>
+          </div>
+        </div>
+        <div class="card-body">ข้างหน้าสุด เสียงเบี้ยวพอสมควร ได้ยินกลุ่มเครื่องเพียงข้างเดียวเป็นหลัก</div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="score-badge sc-55"><span class="num">5.5</span><span class="denom">/10</span></div>
+          <div class="card-meta">
+            <div class="card-zone">Zone D1 / D2</div>
+            <div class="card-tier">❌ ด้อย</div>
+          </div>
+        </div>
+        <div class="card-body">ข้างและถอยหลัง เสียงลดความชัดเจน ห่างจาก sweet spot ทั้งแนวกลางและแนวระยะ</div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="score-badge sc-4"><span class="num">4–5</span><span class="denom">/10</span></div>
+          <div class="card-meta">
+            <div class="card-zone">Zone D3–D7</div>
+            <div class="card-tier">❌ ต่ำ</div>
+          </div>
+        </div>
+        <div class="card-body">ขอบ / หลัง / ชั้น 2 ด้านข้างและแถวท้าย เสียงจาง reflection มาก สู้โซนกลางไม่ได้</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Summary ── -->
+  <div class="summary">
+    <h3>สรุปลำดับที่นั่ง</h3>
+    <p>
+      <strong>A2</strong> › <strong>C1</strong> › <strong>A1 ≈ C2</strong> › B2 › B4/B5 ≈ C3 (2F) › B1/B3 › D1/D2 › D3–D7
+      <br /><br />
+      ถ้าเลือกได้ ให้ยึด <strong>แนวกลาง (A/C)</strong> ก่อนเสมอ และหลีกเลี่ยงแถวข้างสุด (B1/B3/D1/D2) รวมถึงชั้น 2 แถวท้ายๆ
+    </p>
+  </div>
+
+</div>
+
+<footer>สร้างด้วย Claude · วิเคราะห์เพื่อการฟัง Symphony · ข้อมูลคะแนนอาจแตกต่างตาม venue จริง</footer>
+
+</body>
+</html>
